@@ -27,6 +27,11 @@ var Carousel = (function () {
 
 		$items.css({ left: (-position) + "px" });
 	}
+    
+    function clickPerson(evt) {
+        var id = $(evt.target).attr("rel").replace(/^.*(\d+)$/, "$1");
+        Details.loadPerson(id);
+    }
 
     function init () {
         $content = $("[rel=js-carousel] > [rel=js-content]");
@@ -41,6 +46,9 @@ var Carousel = (function () {
         
         $left.on("click", scrollLeft);
         $right.on("click", scrollRight);
+        
+         //$items = $("[rel=js-carousel] > [rel=js-content] > [rel=js-items]");    
+         $items.on("click", "[rel^='js-item-']", clickPerson);
     }
     
     return {
@@ -49,4 +57,4 @@ var Carousel = (function () {
 
 })();
 
-$(document).ready(Carousel.init);
+
